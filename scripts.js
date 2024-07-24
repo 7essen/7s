@@ -1,25 +1,3 @@
-// عرض نافذة كلمة المرور عند تحميل الصفحة
-window.onload = function() {
-    if (!localStorage.getItem('passwordEntered')) {
-        document.getElementById('password-modal').style.display = 'flex';
-    } else {
-        document.querySelector('main').style.display = 'block'; // عرض المحتوى
-    }
-};
-
-function checkPassword() {
-    const passwordInput = document.getElementById('password-input').value;
-    const correctPassword = "HUSSEIN TV"; // تأكد من أن هذه هي كلمة المرور الصحيحة
-
-    if (passwordInput === correctPassword) {
-        localStorage.setItem('passwordEntered', 'true'); // تخزين حالة كلمة المرور
-        document.getElementById('password-modal').style.display = 'none';
-        document.querySelector('main').style.display = 'block'; // عرض المحتوى
-    } else {
-        alert('كلمة المرور غير صحيحة. حاول مرة أخرى.'); // رسالة خطأ
-    }
-}
-
 function openCategory(category) {
     document.getElementById('categories').style.display = 'none';
     document.getElementById('channels').style.display = 'flex';
