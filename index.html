@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koduto</title>
+    <title>Hussein TV</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- إضافة كود AdSense في القسم head -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2393153600924393"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2393153600924393" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <h1>Koduto</h1>
+        <h1>Hussein TV</h1>
     </header>
-
     <main>
         <section id="categories">
             <h2>الفئات</h2>
             <div class="category" onclick="openCategory('sports')">الرياضة</div>
             <div class="category" onclick="openCategory('news')">الأخبار</div>
             <div class="category" onclick="openCategory('entertainment')">الترفيه</div>
-            <!-- المزيد من الفئات -->
         </section>
-
         <section id="channels" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
@@ -31,9 +26,7 @@
             <h2>القنوات</h2>
             <div class="channel" onclick="playStream('path-to-stream-1.mp4')">اسم القناة 1</div>
             <div class="channel" onclick="playStream('path-to-stream-2.mp4')">اسم القناة 2</div>
-            <!-- المزيد من القنوات -->
         </section>
-
         <section id="live-stream" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
@@ -44,34 +37,19 @@
                 المتصفح الخاص بك لا يدعم تشغيل الفيديو.
             </video>
         </section>
-
         <section id="news" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
             </div>
             <h2>الأخبار</h2>
             <p>هنا يتم عرض الأخبار.</p>
-            <!-- يمكنك إضافة المزيد من الأخبار هنا -->
         </section>
-        
-        <!-- إضافة وحدة إعلانية AdSense داخل المحتوى -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2393153600924393"
-             data-ad-slot="1234567890"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </main>
-
     <footer>
         <div class="nav-icon" id="live-icon"><i class="fas fa-tv"></i> مباشر</div>
         <div class="nav-icon" id="home-icon"><i class="fas fa-house"></i> المنزل</div>
         <div class="nav-icon" id="news-icon"><i class="fas fa-newspaper"></i> أخبار</div>
     </footer>
-
     <script src="scripts.js"></script>
 </body>
 </html>
