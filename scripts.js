@@ -1,7 +1,38 @@
+// عرض نافذة كلمة المرور عند تحميل الصفحة
+window.onload = function() {
+    // تحقق مما إذا كانت كلمة المرور قد تم إدخالها من قبل
+    if (!localStorage.getItem('passwordEntered')) {
+        document.getElementById('password-modal').style.display = 'flex';
+    } else {
+        document.querySelector('main').style.display = 'block'; // عرض المحتوى
+    }
+};
+
+function checkPassword() {
+    const passwordInput = document.getElementById('password-input').value;
+    const correctPassword = "HUSSEIN TV";
+
+    if (passwordInput === correctPassword) {
+        localStorage.setItem('passwordEntered', 'true'); // تخزين حالة كلمة المرور
+        document.getElementById('password-modal').style.display = 'none';
+        document.querySelector('main').style.display = 'block'; // عرض المحتوى
+    } else {
+        alert('كلمة المرور غير صحيحة. حاول مرة أخرى.');
+    }
+}
+
 function openCategory(category) {
+    // إخفاء قسم الفئات
     document.getElementById('categories').style.display = 'none';
+    
+    // عرض قسم القنوات
     document.getElementById('channels').style.display = 'flex';
-    // يمكنك إضافة كود لتحميل القنوات بناءً على الفئة هنا
+    
+    // تغيير عنوان قسم القنوات بناءً على الفئة المختارة
+    const channelsTitle = document.querySelector('#channels h2');
+    channelsTitle.textContent = category === 'sports' ? 'قنوات الرياضة' : 
+                                category === 'news' ? 'قنوات الأخبار' : 
+                                'قنوات الترفيه';
 }
 
 function playStream(streamPath) {
