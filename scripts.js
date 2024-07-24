@@ -1,6 +1,5 @@
 // عرض نافذة كلمة المرور عند تحميل الصفحة
 window.onload = function() {
-    // تحقق مما إذا كانت كلمة المرور قد تم إدخالها من قبل
     if (!localStorage.getItem('passwordEntered')) {
         document.getElementById('password-modal').style.display = 'flex';
     } else {
@@ -10,22 +9,19 @@ window.onload = function() {
 
 function checkPassword() {
     const passwordInput = document.getElementById('password-input').value;
-    const correctPassword = "HUSSEIN TV";
+    const correctPassword = "HUSSEIN TV"; // تأكد من أن هذه هي كلمة المرور الصحيحة
 
     if (passwordInput === correctPassword) {
         localStorage.setItem('passwordEntered', 'true'); // تخزين حالة كلمة المرور
         document.getElementById('password-modal').style.display = 'none';
         document.querySelector('main').style.display = 'block'; // عرض المحتوى
     } else {
-        alert('كلمة المرور غير صحيحة. حاول مرة أخرى.');
+        alert('كلمة المرور غير صحيحة. حاول مرة أخرى.'); // رسالة خطأ
     }
 }
 
 function openCategory(category) {
-    // إخفاء قسم الفئات
     document.getElementById('categories').style.display = 'none';
-    
-    // عرض قسم القنوات
     document.getElementById('channels').style.display = 'flex';
     
     // تغيير عنوان قسم القنوات بناءً على الفئة المختارة
