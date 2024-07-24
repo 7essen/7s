@@ -9,33 +9,31 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2393153600924393" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div id="password-modal">
+        <div id="password-box">
+            <h2>أدخل كلمة المرور</h2>
+            <input type="password" id="password-input" placeholder="كلمة المرور">
+            <button onclick="checkPassword()">دخول</button>
+        </div>
+    </div>
+
     <header>
         <h1>Hussein TV</h1>
     </header>
-    <main>
+    
+    <main style="display: none;">
         <section id="categories">
             <h2>الفئات</h2>
             <div class="category" onclick="openCategory('sports')">الرياضة</div>
             <div class="category" onclick="openCategory('news')">الأخبار</div>
             <div class="category" onclick="openCategory('entertainment')">الترفيه</div>
-
-            <!-- إعلان موقع -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-2393153600924393"
-                data-ad-slot="3256014149"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </section>
 
         <section id="channels" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
             </div>
-            <h2>القنوات</h2>
+            <h2>قنوات</h2>
             <div class="channel" onclick="playStream('path-to-stream-1.mp4')">اسم القناة 1</div>
             <div class="channel" onclick="playStream('path-to-stream-2.mp4')">اسم القناة 2</div>
         </section>
@@ -61,78 +59,11 @@
     </main>
 
     <footer>
-        <div class="nav-icon" id="live-icon"><i class="fas fa-tv"></i> مباشر</div>
-        <div class="nav-icon" id="home-icon"><i class="fas fa-house"></i> المنزل</div>
-        <div class="nav-icon" id="news-icon"><i class="fas fa-newspaper"></i> أخبار</div>
+        <div class="nav-icon" id="live-icon" onclick="selectNavIcon('live-icon')"><i class="fas fa-tv"></i> مباشر</div>
+        <div class="nav-icon" id="home-icon" onclick="selectNavIcon('home-icon')"><i class="fas fa-house"></i> المنزل</div>
+        <div class="nav-icon" id="news-icon" onclick="selectNavIcon('news-icon')"><i class="fas fa-newspaper"></i> أخبار</div>
     </footer>
 
-    <script>
-        function openCategory(category) {
-            document.getElementById('categories').style.display = 'none';
-            document.getElementById('channels').style.display = 'block';
-        }
-
-        function playStream(streamPath) {
-            document.getElementById('channels').style.display = 'none';
-            document.getElementById('live-stream').style.display = 'block';
-            const videoPlayer = document.getElementById('video-player');
-            document.getElementById('video-source').src = streamPath;
-            videoPlayer.load();
-            videoPlayer.requestFullscreen();
-        }
-
-        function goBack() {
-            const liveStreamSection = document.getElementById('live-stream');
-            const channelsSection = document.getElementById('channels');
-            const newsSection = document.getElementById('news');
-
-            if (liveStreamSection.style.display === 'block') {
-                liveStreamSection.style.display = 'none';
-                channelsSection.style.display = 'block';
-            } else if (channelsSection.style.display === 'block') {
-                channelsSection.style.display = 'none';
-                document.getElementById('categories').style.display = 'block';
-            } else if (newsSection.style.display === 'block') {
-                newsSection.style.display = 'none';
-                document.getElementById('categories').style.display = 'block';
-            }
-        }
-
-        function selectIcon(iconId) {
-            const icons = document.querySelectorAll('.nav-icon');
-            icons.forEach(icon => {
-                icon.classList.remove('selected');
-            });
-            document.getElementById(iconId).classList.add('selected');
-        }
-
-        document.getElementById('home-icon').addEventListener('click', () => {
-            document.getElementById('categories').style.display = 'block';
-            document.getElementById('channels').style.display = 'none';
-            document.getElementById('live-stream').style.display = 'none';
-            document.getElementById('news').style.display = 'none';
-            selectIcon('home-icon');
-        });
-
-        document.getElementById('live-icon').addEventListener('click', () => {
-            document.getElementById('categories').style.display = 'none';
-            document.getElementById('channels').style.display = 'none';
-            document.getElementById('live-stream').style.display = 'block';
-            document.getElementById('news').style.display = 'none';
-            selectIcon('live-icon');
-        });
-
-        document.getElementById('news-icon').addEventListener('click', () => {
-            document.getElementById('categories').style.display = 'none';
-            document.getElementById('channels').style.display = 'none';
-            document.getElementById('live-stream').style.display = 'none';
-            document.getElementById('news').style.display = 'block';
-            selectIcon('news-icon');
-        });
-
-        window.onload = () => {
-            selectIcon('home-icon');
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
