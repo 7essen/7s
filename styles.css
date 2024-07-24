@@ -1,0 +1,137 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #282c34;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    padding: 20px;
+    margin-bottom: 60px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: fit-content;
+    justify-content: flex-start; /* تأكد من أن المحتوى يبدأ من اليسار */
+}
+
+.back-button i {
+    margin-left: 5px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+#categories, #channels, #live-stream, #news {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.category, .channel {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.category:hover, .channel:hover {
+    transform: scale(1.02);
+}
+
+footer {
+    background-color: #282c34;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between; /* توزيع الأيقونات بشكل متساوي */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.nav-icon {
+    text-align: center;
+    cursor: pointer;
+    position: relative; /* لإضافة دائرة حول الأيقونة */
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s; /* تأثير تكبير الأيقونة عند التحديد */
+    color: black; /* لون الأيقونات */
+}
+
+.nav-icon i {
+    display: block;
+    font-size: 24px; /* حجم الأيقونة */
+}
+
+.nav-icon span {
+    display: block;
+    font-size: 12px;
+    color: black; /* لون النص */
+    margin-top: 5px; /* مسافة بين الأيقونة والنص */
+}
+
+.nav-icon.selected {
+    transform: scale(1.2); /* تكبير الأيقونة عند اختيارها */
+}
+
+.nav-icon.selected::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* يجعل الدائرة تمتد فوق البار */
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80px; /* حجم الدائرة حول الأيقونة النشطة */
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل خفيف */
+    z-index: -1;
+}
+
+footer .nav-icon {
+    flex: 1;
+    padding: 10px 0;
+}
+
+#home-icon {
+    order: 2;
+}
+
+#live-icon {
+    order: 1;
+}
+
+#news-icon {
+    order: 3;
+}
