@@ -44,7 +44,7 @@ main {
     display: flex;
     align-items: center;
     background-color: #2196F3; /* لون خلفية زر الرجوع */
-    color: white;
+    color: white; /* لون النص أبيض */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
