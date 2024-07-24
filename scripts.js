@@ -1,5 +1,8 @@
 function openCategory(category) {
+    // إخفاء قسم الفئات
     document.getElementById('categories').style.display = 'none';
+    
+    // عرض قسم القنوات
     document.getElementById('channels').style.display = 'flex';
     
     // تغيير عنوان قسم القنوات بناءً على الفئة المختارة
