@@ -1,14 +1,12 @@
-// scripts.js
-
 function openCategory(category) {
     document.getElementById('categories').style.display = 'none';
-    document.getElementById('channels').style.display = 'block';
-    // هنا يمكن إضافة كود لتحميل القنوات بناءً على الفئة
+    document.getElementById('channels').style.display = 'flex';
+    // يمكنك إضافة كود لتحميل القنوات بناءً على الفئة هنا
 }
 
 function playStream(streamPath) {
     document.getElementById('channels').style.display = 'none';
-    document.getElementById('live-stream').style.display = 'block';
+    document.getElementById('live-stream').style.display = 'flex';
     const videoPlayer = document.getElementById('video-player');
     document.getElementById('video-source').src = streamPath;
     videoPlayer.load();
@@ -20,47 +18,50 @@ function goBack() {
     const channelsSection = document.getElementById('channels');
     const newsSection = document.getElementById('news');
 
-    if (liveStreamSection.style.display === 'block') {
+    if (liveStreamSection.style.display === 'flex') {
         liveStreamSection.style.display = 'none';
-        channelsSection.style.display = 'block';
-    } else if (channelsSection.style.display === 'block') {
+        channelsSection.style.display = 'flex';
+    } else if (channelsSection.style.display === 'flex') {
         channelsSection.style.display = 'none';
-        document.getElementById('categories').style.display = 'block';
-    } else if (newsSection.style.display === 'block') {
+        document.getElementById('categories').style.display = 'flex';
+    } else if (newsSection.style.display === 'flex') {
         newsSection.style.display = 'none';
-        document.getElementById('categories').style.display = 'block';
+        document.getElementById('categories').style.display = 'flex';
     }
 }
 
-function activateNavIcon(iconId) {
-    const icons = document.querySelectorAll('.nav-icon');
-    icons.forEach(icon => {
+function selectNavIcon(iconId) {
+    document.querySelectorAll('.nav-icon').forEach(icon => {
         icon.classList.remove('selected');
     });
-
     document.getElementById(iconId).classList.add('selected');
 }
 
 document.getElementById('home-icon').addEventListener('click', () => {
-    activateNavIcon('home-icon');
-    document.getElementById('categories').style.display = 'block';
+    selectNavIcon('home-icon');
+    document.getElementById('categories').style.display = 'flex';
     document.getElementById('channels').style.display = 'none';
     document.getElementById('live-stream').style.display = 'none';
     document.getElementById('news').style.display = 'none';
 });
 
 document.getElementById('live-icon').addEventListener('click', () => {
-    activateNavIcon('live-icon');
+    selectNavIcon('live-icon');
     document.getElementById('categories').style.display = 'none';
     document.getElementById('channels').style.display = 'none';
-    document.getElementById('live-stream').style.display = 'block';
+    document.getElementById('live-stream').style.display = 'flex';
     document.getElementById('news').style.display = 'none';
 });
 
 document.getElementById('news-icon').addEventListener('click', () => {
-    activateNavIcon('news-icon');
+    selectNavIcon('news-icon');
     document.getElementById('categories').style.display = 'none';
     document.getElementById('channels').style.display = 'none';
     document.getElementById('live-stream').style.display = 'none';
-    document.getElementById('news').style.display = 'block';
+    document.getElementById('news').style.display = 'flex';
+});
+
+// Set initial selection to home-icon
+document.addEventListener('DOMContentLoaded', () => {
+    selectNavIcon('home-icon');
 });
