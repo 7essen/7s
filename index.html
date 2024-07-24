@@ -18,7 +18,19 @@
             <div class="category" onclick="openCategory('sports')">الرياضة</div>
             <div class="category" onclick="openCategory('news')">الأخبار</div>
             <div class="category" onclick="openCategory('entertainment')">الترفيه</div>
+
+            <!-- إعلان موقع -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-2393153600924393"
+                data-ad-slot="3256014149"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </section>
+
         <section id="channels" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
@@ -27,6 +39,7 @@
             <div class="channel" onclick="playStream('path-to-stream-1.mp4')">اسم القناة 1</div>
             <div class="channel" onclick="playStream('path-to-stream-2.mp4')">اسم القناة 2</div>
         </section>
+
         <section id="live-stream" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
@@ -37,6 +50,7 @@
                 المتصفح الخاص بك لا يدعم تشغيل الفيديو.
             </video>
         </section>
+
         <section id="news" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
@@ -45,11 +59,13 @@
             <p>هنا يتم عرض الأخبار.</p>
         </section>
     </main>
+
     <footer>
         <div class="nav-icon" id="live-icon"><i class="fas fa-tv"></i> مباشر</div>
         <div class="nav-icon" id="home-icon"><i class="fas fa-house"></i> المنزل</div>
         <div class="nav-icon" id="news-icon"><i class="fas fa-newspaper"></i> أخبار</div>
     </footer>
+
     <script src="scripts.js"></script>
 </body>
 </html>
