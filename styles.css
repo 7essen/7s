@@ -4,26 +4,46 @@ body {
     text-align: right;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: #f5f5f5; /* لون خلفية الموقع */
+}
+
+header, footer {
+    background: linear-gradient(135deg, #1a1a1a, #6a11cb); /* تدرج لوني يشبه المجرة */
+    color: white; /* لون النص أبيض */
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 header {
-    background-color: #282c34;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: 0; /* تحديد موقع الهيدر في الأعلى */
+}
+
+footer {
+    bottom: 0; /* تحديد موقع الفوتر في الأسفل */
+    display: flex; /* استخدام flex لتوزيع الأيقونات */
+    justify-content: space-around; /* توزيع الأيقونات بشكل متساوي */
+    align-items: center; /* محاذاة الأيقونات عمودياً */
+    padding: 10px 0; /* إضافة حواف داخلية */
 }
 
 main {
     padding: 20px;
+    margin-top: 60px;
     margin-bottom: 60px;
+    padding-top: 80px; /* زيادة المسافة إلى 80 بكسل */
+    background-color: #3a3a3a; /* لون خلفية المحتوى الرئيسي */
+    border-radius: 10px; /* حواف مستديرة للمحتوى */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* ظل خفيف للمحتوى الرئيسي */
 }
 
 .back-button {
     display: flex;
     align-items: center;
-    background-color: #007bff;
+    background-color: #2196F3; /* لون خلفية زر الرجوع */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -39,18 +59,33 @@ main {
 }
 
 .back-button:hover {
-    background-color: #0056b3;
+    background-color: #0D8BF1; /* لون خلفية زر الرجوع عند التحويم */
 }
 
 #categories, #channels, #live-stream, #news {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    min-height: 200px; /* Ensure there's space for items */
+    min-height: 200px;
+}
+
+.category-box {
+    background-color: #ffffff; /* لون خلفية المربع أبيض */
+    border: 2px solid #6a11cb; /* لون حواف المربع بنفسجي */
+    border-radius: 12px; /* حواف مستديرة للمربع */
+    padding: 15px; /* مسافة داخلية للمربع */
+    text-align: center; /* محاذاة النص في المنتصف */
+    margin-bottom: 10px; /* مسافة أسفل المربع */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف للمربع */
+    transition: transform 0.2s; /* تأثير التحويل عند التحويم */
+}
+
+.category-box:hover {
+    transform: scale(1.05); /* تكبير المربع عند التحويم */
 }
 
 .category, .channel {
-    background-color: #ffffff;
+    background-color: #ffffff; /* لون خلفية العناصر */
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 15px;
@@ -58,25 +93,11 @@ main {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    margin-bottom: 10px; /* Add space between items */
+    margin-bottom: 10px;
 }
 
 .category:hover, .channel:hover {
     transform: scale(1.02);
-}
-
-footer {
-    background-color: #282c34;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
 }
 
 .nav-icon {
@@ -86,19 +107,13 @@ footer {
     width: 60px;
     height: 60px;
     transition: transform 0.3s;
-    color: black;
+    color: white; /* لون الأيقونات أبيض */
+    padding: 10px 0;
 }
 
 .nav-icon i {
     display: block;
     font-size: 24px;
-}
-
-.nav-icon span {
-    display: block;
-    font-size: 12px;
-    color: black;
-    margin-top: 5px;
 }
 
 .nav-icon.selected {
@@ -111,27 +126,62 @@ footer {
     top: -10px;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 80px;
-    height: 80px;
+    width: 80px; /* حجم الدائرة */
+    height: 80px; /* حجم الدائرة */
     border-radius: 50%;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.2); /* لون الدائرة إلى الأبيض مع بعض الشفافية */
     z-index: -1;
 }
 
-footer .nav-icon {
-    flex: 1;
-    padding: 10px 0;
+/* نمط نافذة كلمة المرور */
+#password-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
 }
 
-#home-icon {
-    order: 2;
+#password-box {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* خلفية متدرجة */
+    color: white; /* لون النص في مربع كلمة المرور */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 300px;
 }
 
-#live-icon {
-    order: 1;
+#password-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
 }
 
-#news-icon {
-    order: 3;
+#password-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+button {
+    background-color: #FF5722; /* لون خلفية الزر */
+    color: white; /* لون النص أبيض */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #E64A19; /* لون خلفية الزر عند التحويم */
 }
