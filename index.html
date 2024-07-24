@@ -16,18 +16,17 @@
     <main>
         <section id="categories">
             <h2>الفئات</h2>
-            <div class="category-box" onclick="openCategory('sports')">الرياضة</div>
-            <div class="category-box" onclick="openCategory('news')">الأخبار</div>
-            <div class="category-box" onclick="openCategory('entertainment')">الترفيه</div>
+            <div class="category-box" onclick="openCategory('bein-sports-fhd')">BEIN SPORTS FHD</div>
+            <div class="category-box" onclick="openCategory('bein-sports-sd')">BEIN SPORTS SD</div>
+            <div class="category-box" onclick="openCategory('bein-sports-low')">BEIN SPORTS LOW</div>
         </section>
 
         <section id="channels" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
             </div>
-            <h2>القنوات</h2>
-            <div class="category-box" onclick="playStream('path-to-stream-1.mp4')">اسم القناة 1</div>
-            <div class="category-box" onclick="playStream('path-to-stream-2.mp4')">اسم القناة 2</div>
+            <h2 id="channels-title">القنوات</h2>
+            <!-- القنوات ستتم إضافتها هنا -->
         </section>
 
         <section id="live-stream" style="display: none;">
