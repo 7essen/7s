@@ -24,18 +24,18 @@
     <main style="display: none;">
         <section id="categories">
             <h2>الفئات</h2>
-            <div class="category" onclick="openCategory('sports')">الرياضة</div>
-            <div class="category" onclick="openCategory('news')">الأخبار</div>
-            <div class="category" onclick="openCategory('entertainment')">الترفيه</div>
+            <div class="category-box" onclick="openCategory('sports')">الرياضة</div>
+            <div class="category-box" onclick="openCategory('news')">الأخبار</div>
+            <div class="category-box" onclick="openCategory('entertainment')">الترفيه</div>
         </section>
 
         <section id="channels" style="display: none;">
             <div class="back-button" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
             </div>
-            <h2>قنوات</h2>
-            <div class="channel" onclick="playStream('path-to-stream-1.mp4')">اسم القناة 1</div>
-            <div class="channel" onclick="playStream('path-to-stream-2.mp4')">اسم القناة 2</div>
+            <h2>القنوات</h2>
+            <div class="category-box">اسم القناة 1</div>
+            <div class="category-box">اسم القناة 2</div>
         </section>
 
         <section id="live-stream" style="display: none;">
@@ -54,7 +54,8 @@
                 <i class="fas fa-arrow-left"></i>
             </div>
             <h2>الأخبار</h2>
-            <p>هنا يتم عرض الأخبار.</p>
+            <div class="category-box">خبر 1</div>
+            <div class="category-box">خبر 2</div>
         </section>
     </main>
 
