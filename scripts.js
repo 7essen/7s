@@ -1,7 +1,7 @@
 
 const apiToken = '0c2da0d9a1ba7bc1daa945c8af3ee4403df39622539955043d63bc7156e96a6e3b907cef21b8084d19b452ce1d526010041054f47ce60df0c5419d63523445f6a5ca7257bee9ce13aabeadca32d13ddb82e00e660ace5077c9520212d42035205b87ea3a33890a2e8639eb359c57e2b7dcee661e6bdb5d95c2872cb95cc4127e';
 
-fetch('https://http://localhost:1337/admin/api//matches', {
+fetch('http://localhost:1337/admin/api/matches', {
   method: 'GET',
   headers: {
     'Authorization': `Bearer ${apiToken}`
