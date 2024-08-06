@@ -1,91 +1,116 @@
-
-const apiToken = '0c2da0d9a1ba7bc1daa945c8af3ee4403df39622539955043d63bc7156e96a6e3b907cef21b8084d19b452ce1d526010041054f47ce60df0c5419d63523445f6a5ca7257bee9ce13aabeadca32d13ddb82e00e660ace5077c9520212d42035205b87ea3a33890a2e8639eb359c57e2b7dcee661e6bdb5d95c2872cb95cc4127e';
-
-fetch('http://localhost:1337/admin/api/matches', {
-  method: 'GET',
-  headers: {
-    'Authorization': `Bearer ${apiToken}`
-  }
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error('Error:', error));
-
-
-function openCategory(category) {
-    // إخفاء قسم الفئات
-    document.getElementById('categories').style.display = 'none';
-    
-    // عرض قسم القنوات
-    document.getElementById('channels').style.display = 'flex';
-    
-    // تغيير عنوان قسم القنوات بناءً على الفئة المختارة
-    const channelsTitle = document.getElementById('channels-title');
-    channelsTitle.textContent = category === 'bein-sports-fhd' ? 'BEIN SPORTS FHD' : 
-                                category === 'bein-sports-sd' ? 'BEIN SPORTS SD' : 
-                                'BEIN SPORTS LOW';
-    
-    // إضافة القنوات
-    const channelsContainer = document.getElementById('channels');
-    channelsContainer.innerHTML = '';
-    
-    if (category === 'bein-sports-fhd') {
-        addChannels([
-            'BEIN SPORTS 1 FHD', 'BEIN SPORTS 2 FHD', 'BEIN SPORTS 3 FHD', 'BEIN SPORTS 4 FHD',
-            'BEIN SPORTS 5 FHD', 'BEIN SPORTS 6 FHD', 'BEIN SPORTS 7 FHD', 'BEIN SPORTS 8 FHD',
-            'BEIN SPORTS 9 FHD', 'BEIN SPORTS 10 FHD', 'BEIN SPORTS 11 FHD', 'BEIN SPORTS 12 FHD'
-        ]);
-    } else if (category === 'bein-sports-sd') {
-        addChannels([
-            'BEIN SPORTS 1 SD', 'BEIN SPORTS 2 SD', 'BEIN SPORTS 3 SD', 'BEIN SPORTS 4 SD',
-            'BEIN SPORTS 5 SD', 'BEIN SPORTS 6 SD', 'BEIN SPORTS 7 SD', 'BEIN SPORTS 8 SD',
-            'BEIN SPORTS 9 SD', 'BEIN SPORTS 10 SD', 'BEIN SPORTS 11 SD', 'BEIN SPORTS 12 SD'
-        ]);
-    } else {
-        addChannels([
-            'BEIN SPORTS 1 LOW', 'BEIN SPORTS 2 LOW', 'BEIN SPORTS 3 LOW', 'BEIN SPORTS 4 LOW',
-            'BEIN SPORTS 5 LOW', 'BEIN SPORTS 6 LOW', 'BEIN SPORTS 7 LOW', 'BEIN SPORTS 8 LOW',
-            'BEIN SPORTS 9 LOW', 'BEIN SPORTS 10 LOW', 'BEIN SPORTS 11 LOW', 'BEIN SPORTS 12 LOW'
-        ]);
-    }
+function fetchChannelCategories() {
+    fetch('https://st2-5jox.onrender.com/api/channel-categories?populate=channels')
+        .then(response => response.json())
+        .then(data => {
+            displayChannelCategories(data.data);
+            document.getElementById('channels').style.display = 'flex';
+            document.getElementById('news').style.display = 'none';
+            document.getElementById('matches').style.display = 'none';
+        })
+        .catch(error => console.error('خطأ في استرجاع القنوات:', error));
 }
 
-function addChannels(channelNames) {
-    const channelsContainer = document.getElementById('channels');
-    
-    channelNames.forEach(channelName => {
+function displayChannelCategories(categories) {
+    const channelsContainer = document.getElementById('channels-container');
+    channelsContainer.innerHTML = ''; // مسح المحتوى الحالي
+    categories.forEach(category => {
+        const categoryBox = document.createElement('div');
+        categoryBox.className = 'category-box';
+        categoryBox.innerHTML = `<h3>${category.attributes.name}</h3>`;
+        categoryBox.onclick = () => displayCategoryChannels(category.attributes.channels.data);
+        channelsContainer.appendChild(categoryBox);
+    });
+}
+
+function displayCategoryChannels(channels) {
+    const channelsContainer = document.getElementById('channels-container');
+    channelsContainer.innerHTML = ''; // مسح المحتوى الحالي
+    channels.forEach(channel => {
         const channelBox = document.createElement('div');
         channelBox.className = 'category-box';
-        channelBox.textContent = channelName;
-        channelBox.onclick = () => playStream(`path-to-${channelName.toLowerCase().replace(/\s/g, '-')}.mp4`);
+        channelBox.innerHTML = `
+            <div>${channel.attributes.name}</div>
+        `;
+        channelBox.onclick = () => {
+            window.open(channel.attributes.streamLink, '_blank'); // فتح رابط القناة في نافذة جديدة
+        };
         channelsContainer.appendChild(channelBox);
     });
 }
 
-function playStream(streamPath) {
-    document.getElementById('channels').style.display = 'none';
-    document.getElementById('live-stream').style.display = 'flex';
-    const videoPlayer = document.getElementById('video-player');
-    document.getElementById('video-source').src = streamPath;
-    videoPlayer.load();
-    videoPlayer.requestFullscreen();
+function fetchNews() {
+    fetch('https://st2-5jox.onrender.com/api/news?populate=*')
+        .then(response => response.json())
+        .then(data => {
+            displayNews(data.data);
+            document.getElementById('news').style.display = 'flex';
+            document.getElementById('channels').style.display = 'none';
+            document.getElementById('matches').style.display = 'none';
+        })
+        .catch(error => console.error('خطأ في استرجاع الأخبار:', error));
+}
+
+function displayNews(news) {
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = ''; // مسح المحتوى الحالي
+    news.forEach(article => {
+        const newsBox = document.createElement('div');
+        newsBox.className = 'news-box';
+        newsBox.onclick = () => {
+            window.open(article.attributes.link, '_blank'); // فتح رابط الخبر في نافذة جديدة
+        };
+        newsBox.innerHTML = `
+            <h3>${article.attributes.title}</h3>
+            <img src="${article.attributes.image.data.attributes.url}" alt="${article.attributes.title}" />
+            <p>${article.attributes.content}</p>
+            <p><strong>تاريخ النشر:</strong> ${new Date(article.attributes.date).toLocaleDateString()}</p>
+        `;
+        newsContainer.appendChild(newsBox);
+    });
+}
+
+function fetchMatches() {
+    fetch('https://st2-5jox.onrender.com/api/matches?populate=*')
+        .then(response => response.json())
+        .then(data => {
+            displayMatches(data.data);
+            document.getElementById('matches').style.display = 'flex';
+            document.getElementById('channels').style.display = 'none';
+            document.getElementById('news').style.display = 'none';
+        })
+        .catch(error => console.error('خطأ في استرجاع المباريات:', error));
+}
+
+function displayMatches(matches) {
+    const matchesContainer = document.getElementById('matches-container');
+    matchesContainer.innerHTML = ''; // مسح المحتوى الحالي
+    matches.forEach(match => {
+        const matchBox = document.createElement('div');
+        matchBox.className = 'match-box';
+        matchBox.onclick = () => {
+            window.open(match.attributes.streamLink, '_blank'); // فتح رابط البث في نافذة جديدة
+        };
+        matchBox.innerHTML = `
+            <div class="team">
+                <img src="${match.attributes.logoA.data.attributes.url}" alt="${match.attributes.teamA}" />
+                ${match.attributes.teamA} vs 
+                <img src="${match.attributes.logoB.data.attributes.url}" alt="${match.attributes.teamB}" />
+                ${match.attributes.teamB}
+            </div>
+            <time>${match.attributes.matchTime}</time>
+            <div><strong>اسم المعلق:</strong> ${match.attributes.commentator}</div>
+            <div><strong>اسم القناة:</strong> ${match.attributes.channel}</div>
+        `;
+        matchesContainer.appendChild(matchBox);
+    });
 }
 
 function goBack() {
-    const liveStreamSection = document.getElementById('live-stream');
-    const channelsSection = document.getElementById('channels');
-    const newsSection = document.getElementById('news');
-
-    if (liveStreamSection.style.display === 'flex') {
-        liveStreamSection.style.display = 'none';
-        channelsSection.style.display = 'flex';
-    } else if (channelsSection.style.display === 'flex') {
-        channelsSection.style.display = 'none';
-        document.getElementById('categories').style.display = 'flex';
-    } else if (newsSection.style.display === 'flex') {
-        newsSection.style.display = 'none';
-        document.getElementById('categories').style.display = 'flex';
-    }
+    const sections = ['channels', 'news', 'matches'];
+    sections.forEach(section => {
+        document.getElementById(section).style.display = 'none';
+    });
+    document.getElementById('channels').style.display = 'flex'; // عرض قسم القنوات كقسم افتراضي
 }
 
 function selectNavIcon(iconId) {
@@ -95,31 +120,7 @@ function selectNavIcon(iconId) {
     document.getElementById(iconId).classList.add('selected');
 }
 
-document.getElementById('home-icon').addEventListener('click', () => {
-    selectNavIcon('home-icon');
-    document.getElementById('categories').style.display = 'flex';
-    document.getElementById('channels').style.display = 'none';
-    document.getElementById('live-stream').style.display = 'none';
-    document.getElementById('news').style.display = 'none';
-});
-
-document.getElementById('live-icon').addEventListener('click', () => {
-    selectNavIcon('live-icon');
-    document.getElementById('categories').style.display = 'none';
-    document.getElementById('channels').style.display = 'none';
-    document.getElementById('live-stream').style.display = 'flex';
-    document.getElementById('news').style.display = 'none';
-});
-
-document.getElementById('news-icon').addEventListener('click', () => {
-    selectNavIcon('news-icon');
-    document.getElementById('categories').style.display = 'none';
-    document.getElementById('channels').style.display = 'none';
-    document.getElementById('live-stream').style.display = 'none';
-    document.getElementById('news').style.display = 'flex';
-});
-
-// Set initial selection to home-icon
 document.addEventListener('DOMContentLoaded', () => {
-    selectNavIcon('home-icon');
+    fetchChannelCategories(); // جلب الكاتيجوري للقنوات عند تحميل الصفحة
+    selectNavIcon('home-icon'); // تحديد الأيقونة الافتراضية
 });
