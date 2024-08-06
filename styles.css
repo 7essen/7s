@@ -4,13 +4,13 @@ body {
     text-align: right;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5; /* لون خلفية الموقع */
+    background-color: #e0e0e0; /* لون خلفية فاتح */
 }
 
 header, footer {
-    background: linear-gradient(135deg, #1a1a1a, #6a11cb); /* تدرج لوني يشبه المجرة */
-    color: white; /* لون النص أبيض */
-    padding: 10px 0;
+    background: linear-gradient(135deg, #512da8, #673ab7); /* ألوان متدرجة أغمق */
+    color: white;
+    padding: 15px 0;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     position: fixed;
@@ -19,32 +19,32 @@ header, footer {
 }
 
 header {
-    top: 0; /* تحديد موقع الهيدر في الأعلى */
+    top: 0;
 }
 
 footer {
-    bottom: 0; /* تحديد موقع الفوتر في الأسفل */
-    display: flex; /* استخدام flex لتوزيع الأيقونات */
-    justify-content: space-around; /* توزيع الأيقونات بشكل متساوي */
-    align-items: center; /* محاذاة الأيقونات عمودياً */
-    padding: 10px 0; /* إضافة حواف داخلية */
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
 }
 
 main {
     padding: 20px;
     margin-top: 60px;
     margin-bottom: 60px;
-    padding-top: 80px; /* زيادة المسافة إلى 80 بكسل */
-    background-color: #3a3a3a; /* لون خلفية المحتوى الرئيسي */
-    border-radius: 10px; /* حواف مستديرة للمحتوى */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* ظل خفيف للمحتوى الرئيسي */
+    background-color: #ffffff; /* لون خلفية أبيض */
+    width: 100%; /* عرض 100% */
+    max-width: 1200px; /* عرض أقصى */
+    margin: 0 auto; /* توسيط المحتوى أفقيًا */
 }
 
 .back-button {
     display: flex;
     align-items: center;
-    background-color: #2196F3; /* لون خلفية زر الرجوع */
-    color: white; /* لون النص أبيض */
+    background-color: #673ab7; /* لون زر العودة */
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -59,45 +59,42 @@ main {
 }
 
 .back-button:hover {
-    background-color: #0D8BF1; /* لون خلفية زر الرجوع عند التحويم */
+    background-color: #5e35b1; /* لون عند التمرير أغمق */
 }
 
-#categories, #channels, #live-stream, #news {
+#channels, #news, #matches {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    min-height: 200px;
+    width: 90%; /* جعل العرض 90% */
+    margin: 0 auto; /* توسيط المحتوى أفقيًا */
 }
 
-.category-box {
-    background-color: #ffffff; /* لون خلفية المربع أبيض */
-    border: 2px solid #6a11cb; /* لون حواف المربع بنفسجي */
-    border-radius: 12px; /* حواف مستديرة للمربع */
-    padding: 15px; /* مسافة داخلية للمربع */
-    text-align: center; /* محاذاة النص في المنتصف */
-    margin-bottom: 10px; /* مسافة أسفل المربع */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف للمربع */
-    transition: transform 0.2s; /* تأثير التحويل عند التحويم */
-}
-
-.category-box:hover {
-    transform: scale(1.05); /* تكبير المربع عند التحويم */
-}
-
-.category, .channel {
-    background-color: #ffffff; /* لون خلفية العناصر */
-    border: 1px solid #ddd;
+.category-box, .news-box, .match-box {
+    background-color: #f5f5f5; /* لون خلفية فاتح للصناديق */
+    border: 2px solid #512da8; /* لون الحدود أغمق */
     border-radius: 12px;
-    padding: 15px;
+    padding: 15px; /* البادينج للمحتوى */
     text-align: center;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
     margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer; /* تغيير المؤشر إلى يد */
 }
 
-.category:hover, .channel:hover {
-    transform: scale(1.02);
+.category-box:hover, .news-box:hover, .match-box:hover {
+    transform: scale(1.05); /* تأثير عند التمرير */
+}
+
+h2 {
+    margin: 0;
+    color: #512da8; /* لون العنوان أغمق */
+}
+
+.news-box img, .match-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .nav-icon {
@@ -107,28 +104,21 @@ main {
     width: 60px;
     height: 60px;
     transition: transform 0.3s;
-    color: white; /* لون الأيقونات أبيض */
+    color: #212121; /* لون الأيقونات أسود */
     padding: 10px 0;
 }
 
-.nav-icon i {
-    display: block;
-    font-size: 24px;
-}
-
-.nav-icon.selected {
-    transform: scale(1.2);
-}
-
-.nav-icon.selected::before {
+/* إضافة دائرة بيضاء حول الأيقونة المختارة */
+.nav-icon.selected::after {
     content: "";
     position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 80px; /* حجم الدائرة */
-    height: 80px; /* حجم الدائرة */
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.2); /* لون الدائرة إلى الأبيض مع بعض الشفافية */
-    z-index: -1;
+    top: 27px; /* رفع الدائرة لأعلى بمقدار 27 بكسل (30 - 3) */
+    left: 50%; /* مركز الدائرة أفقيًا */
+    transform: translate(-50%, -50%); /* تحريك الدائرة لتكون في المنتصف */
+    width: 80px; /* زيادة حجم الدائرة */
+    height: 80px; /* زيادة حجم الدائرة */
+    border: 3px solid white; /* دائرة بيضاء */
+    border-radius: 50%; /* دائرة كاملة */
+    background-color: white; /* خلفية بيضاء بدون شفافية */
+    z-index: -1; /* وضع الدائرة خلف الأيقونة */
 }
