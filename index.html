@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hussein TV</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css"> <!-- رابط لملف CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /> <!-- رابط لأيقونات Font Awesome -->
 </head>
 <body>
     <header>
@@ -13,37 +13,40 @@
     </header>
     
     <main>
-        <section id="channels" style="display: flex;">
+        <section id="channels">
             <div class="back-button" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-left"></i> <!-- سهم الرجوع -->
             </div>
-            <h2>القنوات</h2>
-            <div id="channels-container"></div>
+            <div id="channels-container"></div> <!-- حاوية لعرض الصور -->
         </section>
 
         <section id="news" style="display: none;">
             <div class="back-button" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-left"></i> <!-- سهم الرجوع -->
             </div>
-            <h2>الأخبار</h2>
             <div id="news-container"></div>
         </section>
 
         <section id="matches" style="display: none;">
             <div class="back-button" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-left"></i> <!-- سهم الرجوع -->
             </div>
-            <h2>مباشر</h2>
             <div id="matches-container"></div>
         </section>
     </main>
 
     <footer>
-        <div class="nav-icon" id="home-icon" onclick="selectNavIcon('home-icon'); fetchChannelCategories();"><i class="fas fa-house"></i> القنوات</div>
-        <div class="nav-icon" id="live-icon" onclick="selectNavIcon('live-icon'); fetchMatches();"><i class="fas fa-tv"></i> مباشر</div>
-        <div class="nav-icon" id="news-icon" onclick="selectNavIcon('news-icon'); fetchNews();"><i class="fas fa-newspaper"></i> الأخبار</div>
+        <div class="nav-icon" id="home-icon" onclick="selectNavIcon('home-icon'); fetchChannelCategories();">
+            <i class="fas fa-house"></i> القنوات
+        </div>
+        <div class="nav-icon" id="live-icon" onclick="selectNavIcon('live-icon'); fetchMatches();">
+            <i class="fas fa-tv"></i> مباشر
+        </div>
+        <div class="nav-icon" id="news-icon" onclick="selectNavIcon('news-icon'); fetchNews();">
+            <i class="fas fa-newspaper"></i> الأخبار
+        </div>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="scripts.js"></script> <!-- رابط لملف جافا سكريبت -->
 </body>
 </html>
