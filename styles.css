@@ -25,48 +25,26 @@ header {
 footer {
     bottom: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around; /* توزيع الأيقونات بالتساوي */
     align-items: center;
     padding: 10px 0;
 }
 
 main {
-    padding: 20px;
-    margin-top: 60px;
-    margin-bottom: 60px;
+    padding: 0; /* إزالة البادينج */
+    margin-top: 60px; /* مساحة أسفل الهيدر */
+    margin-bottom: 60px; /* مساحة أعلى الفوتر */
     background-color: #ffffff; /* لون خلفية أبيض */
     width: 100%; /* عرض 100% */
-    max-width: 1200px; /* عرض أقصى */
+    max-width: 100%; /* عرض أقصى */
     margin: 0 auto; /* توسيط المحتوى أفقيًا */
-}
-
-.back-button {
-    display: flex;
-    align-items: center;
-    background-color: #673ab7; /* لون زر العودة */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    width: fit-content;
-    justify-content: flex-start;
-}
-
-.back-button i {
-    margin-left: 5px;
-}
-
-.back-button:hover {
-    background-color: #5e35b1; /* لون عند التمرير أغمق */
 }
 
 #channels, #news, #matches {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 90%; /* جعل العرض 90% */
+    gap: 25px; /* تغيير الـ gap إلى 25px */
+    width: 80%; /* جعل العرض 80% */
     margin: 0 auto; /* توسيط المحتوى أفقيًا */
 }
 
@@ -80,6 +58,8 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     cursor: pointer; /* تغيير المؤشر إلى يد */
+    width: 100%; /* جعل العرض 100% */
+    margin-top: 170px;
 }
 
 .category-box:hover, .news-box:hover, .match-box:hover {
@@ -112,7 +92,7 @@ h2 {
 .nav-icon.selected::after {
     content: "";
     position: absolute;
-    top: 27px; /* رفع الدائرة لأعلى بمقدار 27 بكسل (30 - 3) */
+    top: 27px; /* رفع الدائرة لأعلى بمقدار 27 بكسل */
     left: 50%; /* مركز الدائرة أفقيًا */
     transform: translate(-50%, -50%); /* تحريك الدائرة لتكون في المنتصف */
     width: 80px; /* زيادة حجم الدائرة */
@@ -121,4 +101,12 @@ h2 {
     border-radius: 50%; /* دائرة كاملة */
     background-color: white; /* خلفية بيضاء بدون شفافية */
     z-index: -1; /* وضع الدائرة خلف الأيقونة */
+}
+
+/* Media Queries لتخصيص التصميم لأحجام شاشات مختلفة */
+@media (max-width: 600px) {
+    .match {
+        flex-direction: column; /* جعل العناصر في عمود على الشاشات الصغيرة */
+        align-items: flex-start; /* محاذاة العناصر إلى اليسار */
+    }
 }
