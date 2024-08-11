@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', () => {
+    fetchChannelCategories(); // جلب الكاتيجوري للقنوات عند تحميل الصفحة
+    selectNavIcon('home-icon'); // تحديد الأيقونة الافتراضية
+
+    // Initialize Plyr
+    window.player = new Plyr('#player', {
+        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+        autoplay: false, // يمكن تعيينه إلى true إذا كنت ترغب في تشغيل الفيديو تلقائيًا
+    });
+});
+
 function fetchChannelCategories() {
     fetch('https://st2-5jox.onrender.com/api/channel-categories?populate=channels')
         .then(response => response.json())
@@ -32,7 +43,7 @@ function displayCategoryChannels(channels) {
             <div>${channel.attributes.name}</div>
         `;
         channelBox.onclick = () => {
-            window.open(channel.attributes.streamLink, '_blank'); // فتح رابط القناة في نافذة جديدة
+            openVideo(channel.attributes.streamLink); // فتح رابط القناة في المشغل
         };
         channelsContainer.appendChild(channelBox);
     });
@@ -87,9 +98,6 @@ function displayMatches(matches) {
     matches.forEach(match => {
         const matchBox = document.createElement('div');
         matchBox.className = 'match-box';
-        matchBox.onclick = () => {
-            window.open(match.attributes.streamLink, '_blank'); // فتح رابط البث في نافذة جديدة
-        };
         matchBox.innerHTML = `
             <div class="team">
                 <img src="${match.attributes.logoA.data.attributes.url}" alt="${match.attributes.teamA}" />
@@ -101,26 +109,48 @@ function displayMatches(matches) {
             <div><strong>اسم المعلق:</strong> ${match.attributes.commentator}</div>
             <div><strong>اسم القناة:</strong> ${match.attributes.channel}</div>
         `;
+        matchBox.onclick = () => {
+            openVideo(match.attributes.streamLink); // فتح رابط البث في المشغل
+        };
         matchesContainer.appendChild(matchBox);
     });
 }
 
-function goBack() {
-    const sections = ['channels', 'news', 'matches'];
-    sections.forEach(section => {
-        document.getElementById(section).style.display = 'none';
-    });
-    document.getElementById('channels').style.display = 'flex'; // عرض قسم القنوات كقسم افتراضي
+function openVideo(url) {
+    const videoOverlay = document.getElementById('video-overlay');
+    videoOverlay.style.display = 'block';
+    
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(player.media);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            if (player.media.paused) {
+                player.play();
+            }
+        });
+    } else if (player.media.canPlayType('application/vnd.apple.mpegurl')) {
+        player.media.src = url;
+        player.media.addEventListener('loadedmetadata', function() {
+            if (player.media.paused) {
+                player.play();
+            }
+        });
+    }
+
+    // Request fullscreen mode
+    player.fullscreen.request();
+}
+
+function closeVideo() {
+    const videoOverlay = document.getElementById('video-overlay');
+    videoOverlay.style.display = 'none';
+    player.pause(); // إيقاف الفيديو عند إغلاق المشغل
 }
 
 function selectNavIcon(iconId) {
-    document.querySelectorAll('.nav-icon').forEach(icon => {
-        icon.classList.remove('selected');
-    });
+    // Remove 'selected' class from all icons
+    document.querySelectorAll('.nav-icon').forEach(icon => icon.classList.remove('selected'));
+    // Add 'selected' class to the clicked icon
     document.getElementById(iconId).classList.add('selected');
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetchChannelCategories(); // جلب الكاتيجوري للقنوات عند تحميل الصفحة
-    selectNavIcon('home-icon'); // تحديد الأيقونة الافتراضية
-});
